@@ -13,6 +13,11 @@ use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
+
+if (App::environment('production')) {
+    URL::forceScheme('https');
+}
+
 Route::group([
 
     'middleware' => 'api',
