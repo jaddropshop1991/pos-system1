@@ -14,7 +14,7 @@ use App\Http\Controllers\Api\PosController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 
-if (App::environment('local')) {
+if (App::environment('production')) {
     URL::forceScheme('https');
 }
 
