@@ -1,0 +1,45 @@
+      this.form.image = event.target.files[0];
+
+let formData = new FormData();
+
+    formData.append("image", this.form.image);
+    formData.append("name", this.form.name);
+    formData.append("email", this.form.email);
+     formData.append("salary", this.form.salary);
+      formData.append("address", this.form.address);
+            formData.append("phone", this.form.phone);
+       formData.append("nid", this.form.nid);
+        formData.append("joining_date", this.form.joining_date);
+
+
+             axios.post('/api/employee',formData)
+             .then(()=>{
+                 this.$router.push({name:'employee'})
+                 Notification.success()
+             })
+             .catch(error=>this.errors = error.response.data.errors)
+
+
+
+
+
+
+              .component("featured-image", {
+        template:
+            '<div>
+            <input type="file" name="featured_image" @change="onFileChange" class="custom-file-upload" required="" accept="image/*">
+            <div id="preview"><img v-if="url" :src="url" width="100" height="60">
+            </div>
+            </div>',
+        data() {
+            return {
+                url: "",
+            };
+        },
+        methods: {
+            onFileChange(e) {
+                const file = e.target.files[0];
+                this.url = URL.createObjectURL(file);
+            },
+        },
+    })
