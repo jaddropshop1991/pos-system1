@@ -399,7 +399,7 @@
 
 
     allProduct(){
-      axios.get('/api/allproducts/')
+      axios.get('https://laravel-pos-system.herokuapp.com/api/allproducts/')
       .then(({data}) => (this.products = data))
       .catch()
     },
