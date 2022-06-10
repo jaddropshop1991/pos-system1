@@ -325,7 +325,7 @@
   //to make the add to cart changes appear dynamically in the front end
   //without reloading the page 
    AddToCart(id){
-   axios.get('/api/addToCart/'+id)
+   axios.get('https://laravel-pos-system.herokuapp.com/api/addToCart/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
            Notification.cart_success()
@@ -338,13 +338,13 @@
 //to the pos data base back to the front end to show the values
 //of the cart to the user
   cartProduct(){
-    axios.get('/api/cart/product/')
+    axios.get('https://laravel-pos-system.herokuapp.com/api/cart/product/')
       .then(({data}) => (this.carts = data))
       .catch()
   },
 
    removeItem(id){
-   axios.get('/api/remove/cart/'+id)
+   axios.get('https://laravel-pos-system.herokuapp.com/api/remove/cart/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
            Notification.cart_delete()
@@ -353,7 +353,7 @@
    },
 
    increment(id){
-    axios.get('/api/increment/'+id)
+    axios.get('https://laravel-pos-system.herokuapp.com/api/increment/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
            Notification.success()
@@ -361,7 +361,7 @@
       .catch()
    },
    decrement(id){
-    axios.get('/api/decrement/'+id)
+    axios.get('https://laravel-pos-system.herokuapp.com/api/decrement/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
            Notification.success()
@@ -370,7 +370,7 @@
    },
 
     vat(){
-      axios.get('/api/vats/')
+      axios.get('https://laravel-pos-system.herokuapp.com/api/vats/')
       .then(({data}) => (this.vats = data))
       .catch()
     },
@@ -388,7 +388,7 @@
       vat:this.vats.vat, due:this.due, total:total}
 
       //the inserting the data as shown below
-       axios.post('/api/orderdone', data)
+       axios.post('https://laravel-pos-system.herokuapp.com/api/orderdone', data)
              .then(()=>{
               
                  Notification.success()
@@ -404,19 +404,19 @@
       .catch()
     },
      allCategory(){
-      axios.get('/api/allcategories/')
+      axios.get('https://laravel-pos-system.herokuapp.com/api/allcategories/')
       .then(({data}) => (this.categories = data))
       .catch()
     },
     
     allCustomer(){
-      axios.get('/api/allcustomers/')
+      axios.get('https://laravel-pos-system.herokuapp.com/api/allcustomers/')
       .then(({data}) => (this.customers = data))
       .catch(console.log('error'))
     },
  
     subproduct(id){
-      axios.get('/api/getting/product/'+id)
+      axios.get('https://laravel-pos-system.herokuapp.com/api/getting/product/'+id)
       .then(({data}) => (this.getproducts = data))
       .catch()
     } 
