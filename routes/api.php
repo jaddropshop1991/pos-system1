@@ -20,7 +20,7 @@ if (App::environment('production')) {
 
 Route::group([
 
-    'middleware' => 'https://laravel-pos-system.herokuapp.com/api',
+    'middleware' => 'api',
     'prefix' => 'auth'
 
 ], function ($router) {
