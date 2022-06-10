@@ -33,10 +33,6 @@ class AppServiceProvider extends ServiceProvider
             $url->forceSchema('https');
         }
         
-        if((!empty( $_SERVER['HTTP_X_FORWARDED_HOST'])) || (!empty( $_SERVER['HTTP_X_FORWARDED_FOR'])) ) {
- 	$_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
- 	$_SERVER['HTTPS'] = 'on';
- }
         //---------added by me-----------
         Schema:: defaultStringLength(191);
 
