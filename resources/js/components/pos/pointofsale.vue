@@ -1,4 +1,3 @@
-
 <template>
   
   <div>
@@ -13,21 +12,23 @@
 
           <div class="row mb-3">
             
+   <div class="col-xl-5 col-lg-5">
+          <div class="card mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">
+                Expense Insert
 
-            <!-- Area Chart -->
-            <div class="col-xl-5 col-lg-5">
-              <div class="card mb-4">
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Expense Insert</h6>
-         <a class="btn btn-sm btn-info"><font color="#ffffff">Add Customer</font></a>         
-                  
-                </div>
-                
+              </h6>
+              <a class="btn btn-sm btn-info">
+                <font color="#ffffff">
+                Add Customer</font>
+              </a>
+            </div>
+    
 
 
- 
-                
-                <div class="table-responsive" style="font-size: 12px;">
+              
+                <div class="table-responsive" style="font-size:15px;">
                   <table class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr>
@@ -40,81 +41,101 @@
                     </thead>
                     <tbody>
 
-          <tr v-for="cart in carts" :key="cart.id">
-            <td>{{ cart.pro_name }}</td>
-            <td><input type="text" readonly="" style="width: 15px;" :value="cart.pro_quantity">
-       <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
-   <button  @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger" v-if="cart.pro_quantity >= 2">-</button>
-   <button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
+                      <tr v-for="cart in carts" :key="cart.id">
+                        <td><a href="#">{{cart.pro_name}}</a></td>
+                        <td><input type="text" readonly="" style="width:20px" :value="cart.pro_quantity">
+                        <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
+                       <button @click.prevent="decrement(cart.id)" class="btn btn-sm btn-danger"
+                       v-if="cart.pro_quantity >=2">-</button>
+                      <button class="btn btn-sm btn-danger" v-else="" disabled="">-</button>
+                        </td>
+                        <td>{{cart.product_price}}</td>
+                        <td>{{cart.sub_total}}</td>
+                        <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary"><font color="#ffffff"> X</font></a></td>
+                      </tr>
 
-            </td>
-            <td>{{ cart.product_price  }}</td>
-            <td>{{ cart.sub_total }}</td>
-   <td><a @click="removeItem(cart.id)" class="btn btn-sm btn-primary"><font color="#ffffff">X</font></a></td>
-          </tr>
+                   
+
+                   
+                     
                       
-                       
                     </tbody>
                   </table>
                 </div>
                 <div class="card-footer">
-            <ul class="list-group">
-  <li class="list-group-item d-flex justify-content-between align-items-center">Total Quantity:
-  <strong>{{ qty }}</strong>
-   </li>
-     <li class="list-group-item d-flex justify-content-between align-items-center">Sub Total:
-  <strong>{{ subtotal }} $</strong>
-   </li>
 
-     <li class="list-group-item d-flex justify-content-between align-items-center">Vat:
-  <strong>{{ vats.vat }} %</strong>
-   </li>
-     <li class="list-group-item d-flex justify-content-between align-items-center">Total :
-  <strong>{{ subtotal*vats.vat /100 + subtotal}} $</strong>
-   </li> 
-              
-            </ul>   
-            <br> 
+                  <ul class="list-group">
+                    
+                    <li class="list-group-item d-flex justify-content-between
+                    align-items-center">
+                    Quantity:
+                    <strong>
+                    {{qty}}
+                    </strong>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between
+                    align-items-center">
+                    Sub Total:
+                    <strong>
+                     {{ subtotal }} $
+                    </strong>
+                    </li>
+                    
+                    <li class="list-group-item d-flex justify-content-between
+                    align-items-center">
+                    VAT:
+                    <strong>
+                     {{ vats.vat }} %
+                    </strong>
+                    </li>
 
-        <form @submit.prevent="orderdone">
-          <label>Customer Name</label>
-          <select class="form-control" v-model="customer_id">
-         <option :value="customer.id" v-for="customer in customers">{{customer.name }} </option>
-                 
-           </select>
+                      <li class="list-group-item d-flex justify-content-between
+                    align-items-center">
+                    Total:
+                    <strong>
+                      {{ subtotal*vats.vat/100 + subtotal }} $
+                    </strong>
+                    </li>
+                  </ul>
 
-           <label>Pay</label>
-           <input type="text" class="form-control" required="" v-model="pay">
+                  <br>
 
-           <label>Due</label>
-           <input type="text" class="form-control" required="" v-model="due">
+                  <form @submit.prevent="orderdone">
+                    
+                    <label for="">Customer Name</label>
+                    <select name="" class="form-control" id="" v-model="customer_id">
+                      <option :value="customer.id" v-for="customer in customers">{{customer.name}}</option>
+                     
+                    </select>
 
-          <label>Pay By</label>
-          <select class="form-control" v-model="payby">
-                 <option value="HandCash">Hand Cash </option>
-                 <option value="Cheaque">Cheaque </option>
-                 <option value="GiftCard">Gift Card </option>
-           </select>
+                    <label for="">Pay</label>
+                    <input type="text" class="form-control" required="" v-model="pay">
 
-           <br>
-           <button type="submit" class="btn btn-success">Submit</button>
+                    <label for="">Due</label>
+                    <input type="text" class="form-control" required="" v-model="due">
+                  
+                  <label for="">Pay By</label>
+                    <select name="" class="form-control" id="" v-model="payby">
+                      <option value="HandCash">Hand Cash</option>
+                       <option value="Cheaque">Cheaque</option>
+                       <option value="GiftCard">Gift Card</option>
+                    </select>
+                  
+                    <br>
 
-        </form>    
+                    <button type="submit" class="btn btn-success">Submit</button>
 
-
-
+                  </form>
                 </div>
-             
-
-
-
-
-
-
-              </div>
+          
             </div>
-            <!-- Pie Chart -->
 
+
+
+    
+        </div>
+           
 
 
             <div class="col-xl-7 col-lg-7">
@@ -141,7 +162,7 @@
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
 <div class="card-body">
- <input type="text" v-model="searchTerm" class="form-control" style="width: 560px;" placeholder="Search Product">
+ <input type="text" v-model="searchTerm" class="form-control" style="width: 500px;" placeholder="Search Product">
 
      <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="product in filtersearch" :key="product.id">
@@ -166,12 +187,12 @@
 
 
 
- 
+
 
   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
 
-<input type="text" v-model="getsearchTerm" class="form-control" style="width: 560px;" placeholder="Search Product">
+<input type="text" v-model="getsearchTerm" class="form-control" style="width: 500px;" placeholder="Search Product">
 
      <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-6 col-6" v-for="getproduct in getfiltersearch" :key="getproduct.id">
@@ -219,9 +240,6 @@
 
 
 </template>
-
-
-
 <script type="text/javascript">
   
   export default {
@@ -229,25 +247,27 @@
       if (!User.loggedIn()) {
         this.$router.push({name: '/'})
       }
-    },
-
-    created(){
-    this.allProduct();
+  this.allProduct();
     this.allCategory();
     this.allCustomer();
     this.cartProduct();
-    this.vat();
-    Reload.$on('AfterAdd',() =>{
+     this.vat();
+    //define reload that is declared as global variable in app.js
+    //and that is used in AddToCart method to be 
+    //loaded when the cartProduct method is called 
+    Reload.$on('AfterAdd', ()=>{
       this.cartProduct();
     })
+    },
+    
 
-   }, 
  data(){
       return{
-       customer_id:'',
-       pay:'',
-       due:'',
-       payby:'',
+     
+        customer_id:'',
+        pay:'',
+        due:'',
+        payby:'',
 
         products:[],
         categories:'',
@@ -258,6 +278,7 @@
         errors:'',
         carts:[],
         vats:''
+        
 
       }
     },
@@ -272,81 +293,111 @@
          return getproduct.product_name.match(this.getsearchTerm)
        }) 
       },
-   qty(){
-    let sum = 0;
-    for(let i = 0; i < this.carts.length; i++){
-          sum += (parseFloat(this.carts[i].pro_quantity));      
+
+      qty(){
+        let sum = 0;
+        for(let i = 0; i<this.carts.length; i++){
+          //parseFloat in laravel to reduce decimal character
+          //and make everything as flat
+          sum +=(parseFloat(this.carts[i].pro_quantity));
         }
         return sum;
-   },
-   subtotal(){
-    let sum = 0;
-    for(let i = 0; i < this.carts.length; i++){
-    sum += (parseFloat(this.carts[i].pro_quantity) * parseFloat(this.carts[i].product_price));      
-        }
-       return sum;
-
       },
+
+      subtotal(){
+        let sum = 0;
+        for(let i = 0; i<this.carts.length; i++){
+          //parseFloat in laravel to reduce decimal character
+          //and make everything as flat
+          sum +=(parseFloat(this.carts[i].pro_quantity)*parseFloat(this.carts[i].product_price));
+        }
+        return sum;
+      }
+
+      
+  
 
     },
  
   methods:{
     // Cart Methods Here
-  AddToCart(id){
+  //add Reload global variable in the function defined globally in app.js
+  //to make the add to cart changes appear dynamically in the front end
+  //without reloading the page 
+   AddToCart(id){
    axios.get('/api/addToCart/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
-        Notification.cart_success()
+           Notification.cart_success()
       })
       .catch()
-  },
+   },
+    // End Cart Methods 
+
+// gets the products after being added by the AddToCart method
+//to the pos data base back to the front end to show the values
+//of the cart to the user
   cartProduct(){
-      axios.get('/api/cart/product/')
+    axios.get('/api/cart/product/')
       .then(({data}) => (this.carts = data))
       .catch()
   },
-  removeItem(id){
+
+   removeItem(id){
    axios.get('/api/remove/cart/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
-        Notification.cart_delete()
+           Notification.cart_delete()
       })
       .catch()
-  },
-  increment(id){
-  axios.get('/api/increment/'+id)
+   },
+
+   increment(id){
+    axios.get('/api/increment/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
-        Notification.success()
+           Notification.success()
       })
       .catch()
-  },
+   },
    decrement(id){
     axios.get('/api/decrement/'+id)
       .then(() => {
         Reload.$emit('AfterAdd');
-        Notification.success()
+           Notification.success()
       })
-      .catch() 
-  }, 
-  vat(){
-       axios.get('/api/vats/')
+      .catch()
+   },
+
+    vat(){
+      axios.get('/api/vats/')
       .then(({data}) => (this.vats = data))
       .catch()
-  },
-  orderdone(){
-    let total = this.subtotal*this.vats.vat /100 + this.subtotal;
-    var data = {qty:this.qty, subtotal:this.subtotal, customer_id:this.customer_id, payby:this.payby, pay:this.pay, due:this.due, vat:this.vats.vat, total:total }
+    },
 
-    axios.post('/api/orderdone',data)
-       .then(() => {
-          Notification.success()
-         this.$router.push({name: 'home'})
-       }) 
+//order processing when submitting the form when order is done 
+    orderdone(){
+      let total = this.subtotal*this.vats.vat/100 + this.subtotal;
+      //using the methods of qty and subtotal to access
+      //the qty and subtotal in those methods 
+      //by using qty:this.qty and subtotal:this.subtotal and 
+      //the form attributes defined above by using for example
+      //payby:this.payby and due:this.due 
+      var data = {qty:this.qty, subtotal:this.subtotal,
+      customer_id:this.customer_id, payby:this.payby, pay:this.pay,
+      vat:this.vats.vat, due:this.due, total:total}
 
-  },
-   
-    // End Cart Methods 
+      //the inserting the data as shown below
+       axios.post('/api/orderdone', data)
+             .then(()=>{
+              
+                 Notification.success()
+                 this.$router.push({name:'home'})
+             })
+            
+         },
+
+
     allProduct(){
       axios.get('/api/allproducts/')
       .then(({data}) => (this.products = data))
@@ -357,12 +408,13 @@
       .then(({data}) => (this.categories = data))
       .catch()
     },
-
+    
     allCustomer(){
       axios.get('/api/allcustomers/')
       .then(({data}) => (this.customers = data))
       .catch(console.log('error'))
     },
+ 
     subproduct(id){
       axios.get('/api/getting/product/'+id)
       .then(({data}) => (this.getproducts = data))
@@ -379,7 +431,7 @@
 
 <style type="text/css" scoped>
   #em_photo{
-    height: 100px;
-    width: 135px;
+    height: 90px;
+    width: 100px;
   }
 </style>
