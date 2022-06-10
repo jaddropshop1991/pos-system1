@@ -58,7 +58,7 @@ class CartController extends Controller
         $product = DB::table('pos')->where('id',$id)->first();
         $subtotal = $product->pro_quantity*$product->product_price;
 
-        DB::table('pos')->where('id',$id);
+        DB::table('pos')->where('id',$id)->update(['sub_total'=>$subtotal]);
         return response('Done');
     }
 
