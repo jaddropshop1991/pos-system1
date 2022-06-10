@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class CartController extends Controller
 {
     //
-    public function addToCart(Request $product,$id){
+    public function addToCart(Request $request,$id){
         $product =DB::table('products')->where('id',$id)->first();
 
         //to check if the product added to the cart is the same or not
