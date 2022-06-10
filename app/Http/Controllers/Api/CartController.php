@@ -51,12 +51,12 @@ class CartController extends Controller
 
 
     public function increment($id){
-        $quantity=DB::table('pos')->where('id',$id)->increment('pro_quantity');
+        $quantity=DB::table('pos')->where('pro_id',$id)->increment('pro_quantity');
 
-        $product = DB::table('pos')->where('id',$id)->first();
+        $product = DB::table('pos')->where('pro_id',$id)->first();
         $subtotal = $product->pro_quantity*$product->product_price;
 
-        DB::table('pos')->where('id',$id)->update(['sub_total'=>$subtotal]);
+        DB::table('pos')->where('pro_id',$id)->update(['sub_total'=>$subtotal]);
         return response('Done');
     }
 
