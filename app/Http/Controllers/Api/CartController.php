@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\POS;
+use App\Models\Pos;
 use App\Models\Product;
 
 class CartController extends Controller
@@ -17,14 +17,14 @@ class CartController extends Controller
         //to check if the product added to the cart is the same or not
         //and update only the quantity without adding new row to avoid data
         //redundancy and update the subtotal price when incrementing the quantity
-        $check = POS::where('pro_id',$id)->first();
+        $check = Pos::where('pro_id',$id)->first();
         if($check){
-            POS::where('pro_id',$id)->increment('pro_quantity');
+            Pos::where('pro_id',$id)->increment('pro_quantity');
             
-            $product = POS::where('pro_id',$id)->first();
+            $product = Pos::where('pro_id',$id)->first();
             $subtotal = $product->pro_quantity*$product->product_price;
     
-            POS::where('pro_id',$id)->update(['sub_total'=>$subtotal]);
+            Pos::where('pro_id',$id)->update(['sub_total'=>$subtotal]);
         }
         else{
 
