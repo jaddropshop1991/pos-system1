@@ -10,19 +10,19 @@ class CartController extends Controller
 {
     //
     public function addToCart(Request $request,$id){
-        $product =DB::table('products')->where('id',3)->first();
+        $product =DB::table('products')->where('id',$id)->first();
 
         //to check if the product added to the cart is the same or not
         //and update only the quantity without adding new row to avoid data
         //redundancy and update the subtotal price when incrementing the quantity
-        $check = DB::table('pos')->where('pro_id',3)->first();
+        $check = DB::table('pos')->where('pro_id',$id)->first();
         if($check){
-            DB::table('pos')->where('pro_id',3)->increment('pro_quantity');
+            DB::table('pos')->where('pro_id',$id)->increment('pro_quantity');
             
-            $product = DB::table('pos')->where('pro_id',3)->first();
+            $product = DB::table('pos')->where('pro_id',$id)->first();
             $subtotal = $product->pro_quantity*$product->product_price;
     
-            DB::table('pos')->where('pro_id',3)->update(['sub_total'=>$subtotal]);
+            DB::table('pos')->where('pro_id',$id)->update(['sub_total'=>$subtotal]);
         }
         else{
 
