@@ -5,24 +5,26 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\POS;
+use App\Models\Product;
 
 class CartController extends Controller
 {
     //
     public function addToCart(Request $request,$id){
-        $product =DB::table('products')->where('id',$id)->first();
+        $product =Product::where('id',$id)->first();
 
         //to check if the product added to the cart is the same or not
         //and update only the quantity without adding new row to avoid data
         //redundancy and update the subtotal price when incrementing the quantity
-        $check = DB::table('pos')->where('pro_id',$id)->first();
+        $check = POS::where('pro_id',$id)->first();
         if($check){
-            DB::table('pos')->where('pro_id',$id)->increment('pro_quantity');
+            POS::where('pro_id',$id)->increment('pro_quantity');
             
-            $product = DB::table('pos')->where('pro_id',$id)->first();
+            $product = POS::where('pro_id',$id)->first();
             $subtotal = $product->pro_quantity*$product->product_price;
     
-            DB::table('pos')->where('pro_id',$id)->update(['sub_total'=>$subtotal]);
+            POS::where('pro_id',$id)->update(['sub_total'=>$subtotal]);
         }
         else{
 
