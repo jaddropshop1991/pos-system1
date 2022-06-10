@@ -41,7 +41,7 @@
                     </thead>
                     <tbody>
 
-                      <tr v-for="cart in carts" :key="cart.id">
+                      <tr v-for="cart in carts" :key="cart.pro_id">
                         <td><a href="#">{{cart.pro_name}}</a></td>
                         <td><input type="text" readonly="" style="width:20px" :value="cart.pro_quantity">
                         <button @click.prevent="increment(cart.id)" class="btn btn-sm btn-success">+</button>
