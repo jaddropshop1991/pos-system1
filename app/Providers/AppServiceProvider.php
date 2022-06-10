@@ -25,13 +25,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       /* if($this->app->environment('production')) {
+        if($this->app->environment('production')) {
     \URL::forceScheme('https');
-}*/
-         if(env('APP_ENV') !== 'production')
+}
+         /*if(env('APP_ENV') !== 'production')
         {
             $url->forceSchema('https');
-        }
+        }*/
         
         //---------added by me-----------
         Schema:: defaultStringLength(191);
