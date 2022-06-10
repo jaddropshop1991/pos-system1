@@ -18,6 +18,7 @@
   <link href="{{  asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{  asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
       <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+      <meta http-equiv="Content-Security-Policy" content="block-all-mixed-content">
 </head>
 
 <body id="page-top">
