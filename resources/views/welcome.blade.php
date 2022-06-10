@@ -522,6 +522,10 @@ $("#topbar").css("display","");
   <script src="{{  asset('backend/js/ruang-admin.min.js')}}"></script>
   <script src="{{  asset('backend/vendor/chart.js/Chart.min.js')}}"></script>
   <script src="{{  asset('backend/js/demo/chart-area-demo.js')}}"></script>  
+  <script>if((!empty( $_SERVER['HTTP_X_FORWARDED_HOST'])) || (!empty( $_SERVER['HTTP_X_FORWARDED_FOR'])) ) {
+ 	$_SERVER['HTTP_HOST'] = $_SERVER['HTTP_X_FORWARDED_HOST'];
+ 	$_SERVER['HTTPS'] = 'on';
+ }<script>
 </body>
 
 </html>
